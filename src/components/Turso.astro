@@ -1,0 +1,14 @@
+---
+import { turso } from '../turso'
+
+const { rows } = await turso.execute('SELECT * FROM posts JOIN authors ON posts.id_author = authors.id')
+
+
+console.log(rows)
+---
+
+<ul>
+  {rows.map((post) => (
+    <li>{post.title} by {post.name}</li>
+  ))}
+</ul>

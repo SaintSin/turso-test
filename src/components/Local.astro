@@ -1,0 +1,25 @@
+---
+import { db, posts } from 'astro:db';
+
+if (Astro.request.method === 'POST') {
+  // parse form data
+  const formData = await Astro.request.formData();
+  const title = formData.get('title');
+  const id_author = formData.get('id_author');
+  if (typeof title === 'string'  && typeof id_author ==='number') {
+    // insert form data into the Comment table
+    await db.insert(posts).values({ title, id_author });
+    console.log("Inserted")
+  }
+  else{console.log("Nope")}}
+---
+
+
+<form method="POST">
+  <label for="title">Title</label>
+  <input id="title" name="title" />
+  <label for="id_author">id_author</label>
+  <input id="id_author" name="id_author" />
+ 
+  <button type="submit">Submit</button>
+</form>

@@ -1,0 +1,15 @@
+---
+import { db, posts } from 'astro:db';
+
+const data = await db.select().from(posts);
+---
+
+<h2>Comments</h2>
+
+{
+  data.map(({ title }) => (
+    <article>
+      <p>Author: {title}</p>
+    </article>
+  ))
+}
